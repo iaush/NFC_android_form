@@ -98,9 +98,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "NFC_form"
+  "defaultProject": "NFC_form",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
