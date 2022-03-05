@@ -6,14 +6,20 @@ import { AppComponent } from './app.component';
 import { QuestionsComponent } from './questions/questions.component';
 
 import { NFC, Ndef } from "@awesome-cordova-plugins/nfc/ngx";
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    ProgressSpinnerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressSpinnerModule
   ],
   providers: [NFC,
     Ndef],

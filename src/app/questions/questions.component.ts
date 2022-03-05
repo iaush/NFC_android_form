@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 
 import { NFC, Ndef } from '@awesome-cordova-plugins/nfc/ngx';
 
@@ -9,6 +9,8 @@ import { NFC, Ndef } from '@awesome-cordova-plugins/nfc/ngx';
      <head> 
  
  <style> 
+
+
  .card { 
 padding: 3%; 
 margin: 40% auto; 
@@ -88,7 +90,7 @@ opacity: 1;
              <input type="email" name="email" id="email" placeholder="Email" value='' > 
          </div> 
          <button type='button' id="next_btn" (click)="open = !open; open2=!open2"> Next </button> 
-         <button type='button'  (click)="startNFCListener()"> Test </button> 
+         <!-- <button type='button'  (click)="startNFCListener()"> Test </button> -->
      </div>  
 
      <div class="card" id="card2" [ngClass]="{'active': open2}"> 
@@ -112,16 +114,24 @@ opacity: 1;
   styles: [
   ]
 })
-export class QuestionsComponent  {
+export class QuestionsComponent implements OnInit  {
+
+    showspinner =false
 
     constructor(private nfc: NFC, private ndef: Ndef) { }
 
+    ngOnInit(): void {
+        this.startNFCListener()
+    }
+
+    
     nfcread(){
         let flags = this.nfc.FLAG_READER_NFC_A | this.nfc.FLAG_READER_NFC_V;
         this.nfc.readerMode(flags).subscribe(
            tag => alert(JSON.stringify(tag)),
           err => alert('Error reading tag '+ err))
     }  
+
 
     startNFCListener() {
 
@@ -137,7 +147,9 @@ export class QuestionsComponent  {
                 inputemailElement.value= msg.split('EMAIL:')[1].split('ADR:')[0]
 
                 alert(msg)},
-            err => alert('Error reading tag '+ err))
+            err => {
+                
+                alert('Error reading tag '+ err)})
       }
     
 
